@@ -1,7 +1,7 @@
-package org.example.playground.command;
+package org.example.playground.model.command;
 
 import lombok.Value;
-import org.example.playground.domain.incident.Clock;
+import org.example.playground.model.domain.incident.Clock;
 
 @Value(staticConstructor = "of")
 public class AddGoal {

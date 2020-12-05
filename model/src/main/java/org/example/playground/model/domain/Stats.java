@@ -1,4 +1,4 @@
-package org.example.playground.domain;
+package org.example.playground.model.domain;
 
 
 import lombok.Data;
