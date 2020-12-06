@@ -6,6 +6,7 @@ import org.example.playground.model.util.fixture.IncidentFixture;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class IncidentMapperTest implements IncidentFixture {
 
@@ -15,6 +16,8 @@ public class IncidentMapperTest implements IncidentFixture {
 
         assertEquals(NEW_GOAL_HOME_PLAYER_1.getPlayer(), goalScored.getPlayer());
         assertEquals(NEW_GOAL_HOME_PLAYER_1.getClock(), goalScored.getClock());
+
+        assertNull(IncidentMapper.INSTANCE.newGoalToGoalScored(null));
     }
 
     @Test
@@ -23,6 +26,8 @@ public class IncidentMapperTest implements IncidentFixture {
 
         assertEquals(GOAL_SCORED_HOME_PLAYER_1.getPlayer(), goal.getPlayer());
         assertEquals(GOAL_SCORED_HOME_PLAYER_1.getClock(), goal.getClock());
+
+        assertNull(IncidentMapper.INSTANCE.goalScoredToGoal(null));
     }
 
 }

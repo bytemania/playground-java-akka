@@ -6,8 +6,7 @@ import org.example.playground.model.event.MatchCreated;
 import org.example.playground.model.util.fixture.MatchFixture;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MatchMapperTest implements MatchFixture {
     @Test
@@ -18,6 +17,8 @@ public class MatchMapperTest implements MatchFixture {
         assertEquals(NEW_MATCH.getStartTime(), matchCreated.getStartTime());
         assertEquals(NEW_MATCH.getHome(), matchCreated.getHome());
         assertEquals(NEW_MATCH.getAway(), matchCreated.getAway());
+
+        assertNull(MatchMapper.INSTANCE.matchToMatchCreated(null));
     }
 
     @Test
@@ -30,6 +31,8 @@ public class MatchMapperTest implements MatchFixture {
         assertEquals(MATCH_CREATED.getAway(), match.getAway());
         assertEquals(Stats.create(), match.getStats());
         assertTrue(match.getIncidents().isEmpty());
+
+        assertNull(MatchMapper.INSTANCE.matchCreatedToMatch(null));
     }
 
 
