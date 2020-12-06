@@ -7,6 +7,7 @@ import org.example.playground.model.domain.incident.Clock;
 import org.example.playground.model.domain.incident.Incident;
 import org.example.playground.model.domain.incident.Period;
 import org.example.playground.model.event.GoalScored;
+import org.example.playground.model.exception.PlayerNotFoundException;
 import org.example.playground.model.mapper.IncidentMapper;
 import org.example.playground.model.util.MemoryAppender;
 import org.example.playground.model.util.fixture.IncidentFixture;
@@ -17,8 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MatchTest implements MatchFixture, IncidentFixture {
 
@@ -50,7 +50,10 @@ public class MatchTest implements MatchFixture, IncidentFixture {
     @Test
     public void shouldLogAWarningForInvalidPlayer() {
         GoalScored GOAL_SCORED_INVALID_PLAYER = new GoalScored("invalidPlayer1", new Clock(Period.FIRST_HALF, 33, 45));
-        match.addGoal(GOAL_SCORED_INVALID_PLAYER);
+
+        PlayerNotFoundException exception = assertThrows(PlayerNotFoundException.class, () -> match.addGoal(GOAL_SCORED_INVALID_PLAYER));
+
+        assertEquals("Match id '" + match.getId() + "', player not found 'invalidPlayer1', Goal Ignored", exception.getMessage());
 
         assertEquals(0, match.getStats().getHomeGoals());
         assertEquals(0, match.getStats().getAwayGoals());
@@ -63,7 +66,7 @@ public class MatchTest implements MatchFixture, IncidentFixture {
     }
 
     @Test
-    public void shouldProcessHomeGoal() {
+    public void shouldProcessHomeGoal() throws PlayerNotFoundException {
         match.addGoal(GOAL_SCORED_HOME_PLAYER_1);
 
         assertEquals(1, match.getStats().getHomeGoals());
@@ -73,7 +76,7 @@ public class MatchTest implements MatchFixture, IncidentFixture {
     }
 
     @Test
-    public void shouldProcessAwayGoal() {
+    public void shouldProcessAwayGoal() throws PlayerNotFoundException {
         match.addGoal(GOAL_SCORED_AWAY_PLAYER_1);
 
         assertEquals(0, match.getStats().getHomeGoals());
@@ -83,7 +86,7 @@ public class MatchTest implements MatchFixture, IncidentFixture {
     }
 
     @Test
-    public void shouldProcessMultipleIncidents() {
+    public void shouldProcessMultipleIncidents() throws PlayerNotFoundException {
         match.addGoal(GOAL_SCORED_HOME_PLAYER_2);
         match.addGoal(GOAL_SCORED_AWAY_PLAYER_1);
         match.addGoal(GOAL_SCORED_HOME_PLAYER_1);

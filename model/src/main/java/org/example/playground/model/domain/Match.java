@@ -6,6 +6,7 @@ import org.example.playground.model.domain.incident.Goal;
 import org.example.playground.model.domain.incident.Incident;
 import org.example.playground.model.event.GoalScored;
 import org.example.playground.model.event.MatchCreated;
+import org.example.playground.model.exception.PlayerNotFoundException;
 import org.example.playground.model.mapper.IncidentMapper;
 import org.example.playground.model.mapper.MatchMapper;
 
@@ -34,7 +35,7 @@ public class Match {
         return MatchMapper.INSTANCE.matchCreatedToMatch(matchCreated);
     }
 
-    public void addGoal(GoalScored goalScored) {
+    public void addGoal(GoalScored goalScored) throws PlayerNotFoundException {
         Predicate<Team> findPlayer = team -> team.getPlayers().stream().anyMatch(goalScored.getPlayer()::equals);
 
         boolean isHomeGoal = findPlayer.test(home);
@@ -42,7 +43,7 @@ public class Match {
 
         if (!isHomeGoal && !isAwayGoal) {
             log.warn("Match id '{}', player not found '{}', Goal Ignored", id, goalScored.getPlayer());
-            return;
+            throw new PlayerNotFoundException("Match id '" + id + "', player not found '" + goalScored.getPlayer() + "', Goal Ignored");
         }
 
         if (isHomeGoal) {
