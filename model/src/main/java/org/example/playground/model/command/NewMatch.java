@@ -5,8 +5,8 @@ import org.example.playground.model.domain.Team;
 
 import java.util.Date;
 
-@Value(staticConstructor = "of")
-public class CreateMatch {
+@Value
+public class NewMatch {
     String id;
     Date startTime;
     Team home;

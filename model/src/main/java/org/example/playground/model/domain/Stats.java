@@ -1,10 +1,15 @@
 package org.example.playground.model.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-import lombok.Data;
-
-@Data
+@Getter
+@EqualsAndHashCode
 public class Stats {
+
+    public static Stats create() {
+        return new Stats();
+    }
 
     private int homeGoals;
     private int awayGoals;
@@ -14,8 +19,11 @@ public class Stats {
         awayGoals = 0;
     }
 
-    public static Stats create() {
-        return new Stats();
+    public void homeGoal() {
+        homeGoals++;
     }
 
+    public void awayGoal() {
+        awayGoals++;
+    }
 }

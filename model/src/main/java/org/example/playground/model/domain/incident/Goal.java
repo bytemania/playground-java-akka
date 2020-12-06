@@ -1,10 +1,9 @@
 package org.example.playground.model.domain.incident;
 
-import lombok.Data;
+import lombok.Value;
 
-@Data
-public class Goal {
-    private String id;
-    private String playerName;
-    private Clock clock;
+@Value
+public class Goal implements Incident {
+    String player;
+    Clock clock;
 }

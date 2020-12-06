@@ -2,7 +2,7 @@ package org.example.playground.model.domain.incident;
 
 import lombok.Value;
 
-@Value(staticConstructor = "of")
+@Value
 public class Clock {
     Period period;
     int minutes;
