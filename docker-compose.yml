@@ -12,4 +12,4 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "inbound:10:1,outbound:10:1"
+      KAFKA_CREATE_TOPICS: "inbound:30:1,outbound:30:1"

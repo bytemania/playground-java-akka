@@ -34,6 +34,16 @@
 
         <dependency>
             <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-stream-kafka_${scala.binary.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-stream-kafka-cluster-sharding_${scala.binary.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-stream_${scala.binary.version}</artifactId>
         </dependency>
 

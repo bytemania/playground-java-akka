@@ -25,6 +25,7 @@
 
         <scala.binary.version>2.13</scala.binary.version>
         <akka.version>2.6.10</akka.version>
+        <akka-alpakka.version>2.0.5</akka-alpakka.version>
 
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <lombok.version>1.18.16</lombok.version>
@@ -115,8 +116,20 @@
 
             <dependency>
                 <groupId>com.typesafe.akka</groupId>
+                <artifactId>akka-stream-kafka_${scala.binary.version}</artifactId>
+                <version>${akka-alpakka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.typesafe.akka</groupId>
                 <artifactId>akka-stream_${scala.binary.version}</artifactId>
                 <version>${akka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.typesafe.akka</groupId>
+                <artifactId>akka-stream-kafka-cluster-sharding_${scala.binary.version}</artifactId>
+                <version>${akka-alpakka.version}</version>
             </dependency>
 
             <dependency>
